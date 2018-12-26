@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManageurDeCompte
+namespace Fournisseur_Service
 {
     class Program
     {
