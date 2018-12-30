@@ -21,6 +21,11 @@ namespace Fournisseur_Service
             throw new NotImplementedException();
         }
 
+        public bool dispoOuvrague(string codeOuvrague)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool emprinterOuvrague(Compte compte, string codeOuvrague)
         {
             throw new NotImplementedException();
@@ -36,7 +41,22 @@ namespace Fournisseur_Service
             throw new NotImplementedException();
         }
 
+        public Emprinte[] mesEmprintes(Compte compte)
+        {
+            throw new NotImplementedException();
+        }
+
         public Emprinte[] mesReservation(Compte compte)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool modifierOuvrague(Ouvrague ouvrague)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool nonDispoOuvrague(string codeOuvargue)
         {
             throw new NotImplementedException();
         }

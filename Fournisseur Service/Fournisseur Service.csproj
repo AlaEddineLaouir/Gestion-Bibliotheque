@@ -51,6 +51,7 @@
     <Compile Include="RequeteCompte.cs" />
     <Compile Include="RequeteCompteExe.cs" />
     <Compile Include="RequeteOuvrague.cs" />
+    <Compile Include="RequeteOuvragueExe.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
