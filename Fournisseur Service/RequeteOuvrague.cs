@@ -62,14 +62,10 @@ namespace Fournisseur_Service
             requete += " values (Now(),true,@nu,@cdO);";
             return requete;
         }
-        public static String rendreOuvrague()
-        {
-            String requete = "update ouvrague set disponible=true where code=@code";
-            return requete;
-        }
+        
         public static String listEmprinte()
         {
-            String requete = "select * from emprente where valider=true and dateReservation  between date_sub(now(), interval 2 week) and date_sub(now(), interval -2 week);";
+            String requete = "select * from emprente where codeOuvrague IN (select code from ouvrague where disponible= false) and valider=true and dateReservation  between date_sub(now(), interval 2 week) and date_sub(now(), interval -2 week);";
             return requete;
         }
         public static String listReservation()
@@ -84,7 +80,7 @@ namespace Fournisseur_Service
         }
         public static String mesEmperente()
         {
-            String requete = "select * from emprente where nomUtilisateur_emprenteur=@nu and valider=true and dateReservation  between date_sub(now(), interval 2 week) and date_sub(now(), interval -2 week);";
+            String requete = "select * from emprente where codeOuvrague IN (select code from ouvrague where disponible= false) and nomUtilisateur_emprenteur=@nu and valider=true and dateReservation  between date_sub(now(), interval 2 week) and date_sub(now(), interval -2 week);";
             return requete;
         }
 

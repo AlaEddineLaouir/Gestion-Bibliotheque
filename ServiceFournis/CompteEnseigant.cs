@@ -13,12 +13,7 @@ namespace ServiceFournis
         private String grade;
         private String matrecule;
         private String email;
-        public CompteEnseigant(string nom_utilisteur, string mot_passe, string nom, string prenom, string grade, string matrecule , string email) : base(nom_utilisteur,mot_passe,nom,prenom)
-        {
-            this.Email = email; 
-            this.Grade = grade;
-            this.Matrecule = matrecule;
-        }
+        
 
        
         public string Grade { get => grade; set => grade = value; }

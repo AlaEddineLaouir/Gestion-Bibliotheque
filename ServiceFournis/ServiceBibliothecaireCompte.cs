@@ -8,10 +8,15 @@ namespace ServiceFournis
 {
     public interface ServiceBibliothecaireCompte
     {
-        Compte[] chercherCompte(String cle);
-        Boolean creeCompte(Compte c);
-        Boolean modifierCompte(String nomUtilisateur , Compte compteNouveau);
-        Boolean supprimerCompte(Compte c);
-
+        Compte[] chercherCompteEtudiant(String cle);
+        Compte[] chercherCompteEnseignant(String cle);
+        Boolean creeCompteEtudiant(CompteEtudiant c);
+        Boolean creeCompteEnseignant(CompteEnseigant c);
+        Boolean modifierCompteEtudiant(String nomUtilisateur , CompteEtudiant compteNouveau);
+        Boolean modifierCompteEnseignant(String nomUtilisateur, CompteEnseigant compteNouveau);
+        
+        Boolean verifierNomUtilisateur(String nomUtilisateur);
+        Boolean verifierNumeroCarte(String numeroCarte);
+        Boolean verifierMatrecule(String matrecule);
     }
 }

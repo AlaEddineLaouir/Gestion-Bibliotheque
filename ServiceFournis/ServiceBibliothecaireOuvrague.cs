@@ -10,10 +10,10 @@ namespace ServiceFournis
     {
         Ouvrague[] chercherOuvrague(String motCle);
         Boolean emprinterOuvrague(Compte compte, String codeOuvrague);
-        Boolean validerReservation(Compte compte, String codeOuvrague);
+        Boolean validerReservation(int numeroEmprente);
         Boolean ajouterOuvrague(Ouvrague ouvrague);
-        Boolean modifierOuvrague(Ouvrague ouvrague);
-        Boolean renderOuvrague(Ouvrague ouvrague);
+        Boolean modifierOuvrague(String codeOuvrague ,Ouvrague ouvrague);
+       
         Emprinte[] listReservation();
         Emprinte[] listEmprinte();
         Boolean nonDispoOuvrague(String codeOuvargue);

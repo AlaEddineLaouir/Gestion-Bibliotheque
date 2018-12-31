@@ -8,8 +8,15 @@ namespace ServiceFournis
 {
     public interface ServiceClientCompte
     {
-        Compte seConnecter(String nomUtilisateur, String motPasse);
-        Compte creeCompte(Compte compte);
-        Boolean modifierCompte(String nomUtilisateur ,Compte compteNouveau);
+        CompteEtudiant seConnecterEtudaint(String nomUtilisateur, String motPasse);
+        CompteEnseigant seConnecterEnseignant(String nomUtilisateur, String motPasse);
+        Boolean creeCompteEtudiant(CompteEtudiant c);
+        Boolean creeCompteEnseignant(CompteEnseigant c);
+        Boolean modifierCompteEtudiant(String nomUtilisateur, CompteEtudiant compteNouveau);
+        Boolean modifierCompteEnseignant(String nomUtilisateur, CompteEnseigant compteNouveau);
+        
+        Boolean verifierNomUtilisateur(String nomUtilisateur);
+        Boolean verifierNumeroCarte(String numeroCarte);
+        Boolean verifierMatrecule(String matrecule);
     }
 }
