@@ -2,6 +2,7 @@
 using System.Data;
 using MySql.Data.MySqlClient;
 using ServiceFournis;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Fournisseur_Service
@@ -11,19 +12,19 @@ namespace Fournisseur_Service
         public Compte[] chercherCompteEnseignant(string cle)
         {
             RequeteCompteExe rce = new RequeteCompteExe();
-            MySqlDataReader readre = rce.cherhcerEnseignant(cle);
+            IDataReader readre = rce.cherhcerEnseignant(cle);
             List<CompteEnseigant> enseigants = new List<CompteEnseigant>();
 
             while(readre.Read())
             {
                 CompteEnseigant enseigant = new CompteEnseigant();
 
-                enseigant.Nom_utilisteur = readre.GetString("nomUtilisateur");
-                enseigant.Grade = readre.GetString("grade");
-                enseigant.Matrecule = readre.GetString("matricule");
-                enseigant.Email = readre.GetString("email");
-                enseigant.Nom = readre.GetString("nom");
-                enseigant.Prenom = readre.GetString("prenom");
+                enseigant.Nom_utilisteur = readre.GetString(0);
+                enseigant.Grade = readre.GetString(4);
+                enseigant.Matrecule = readre.GetString(1);
+                enseigant.Email = readre.GetString(5);
+                enseigant.Nom = readre.GetString(2);
+                enseigant.Prenom = readre.GetString(3);
 
                 enseigants.Add(enseigant);
             }
@@ -34,21 +35,23 @@ namespace Fournisseur_Service
 
         public Compte[] chercherCompteEtudiant(string cle)
         {
-            RequeteCompteExe rce = new RequeteCompteExe();
-            MySqlDataReader readre = rce.chercherEtudiant(cle);
-            List<CompteEtudiant> etudiants = new List<CompteEtudiant>();
+            Console.WriteLine("recherche d'un  etudiant avec  : " + cle);
 
+            RequeteCompteExe rce = new RequeteCompteExe();
+            IDataReader readre = rce.chercherEtudiant(cle);
+            List<CompteEtudiant> etudiants = new List<CompteEtudiant>();
+            
             while (readre.Read())
             {
                 CompteEtudiant etudiant = new CompteEtudiant();
 
-                etudiant.Nom_utilisteur = readre.GetString("nomUtilisateur");
-                etudiant.Specialite = readre.GetString("specialite");
-                etudiant.NumeroCarte = readre.GetString("numCarte");
-                etudiant.Email = readre.GetString("email");
-                etudiant.Nom = readre.GetString("nom");
-                etudiant.Prenom = readre.GetString("prenom");
-                etudiant.Niveau = readre.GetString("niveua");
+                etudiant.Nom_utilisteur = readre.GetString(0);
+                etudiant.Specialite = readre.GetString(4);
+                etudiant.NumeroCarte = readre.GetString(1);
+                etudiant.Email = readre.GetString(6);
+                etudiant.Nom = readre.GetString(2);
+                etudiant.Prenom = readre.GetString(3);
+                etudiant.Niveau = readre.GetString(5);
 
                 etudiants.Add(etudiant);
             }
@@ -93,19 +96,19 @@ namespace Fournisseur_Service
         }
 
         
-        public bool verifierMatrecule(string matrecule)
+        public Boolean verifierMatrecule(string matrecule)
         {
             RequeteCompteExe rce = new RequeteCompteExe();
             return rce.verifierMatrecule(matrecule);
         }
 
-        public bool verifierNomUtilisateur(string nomUtilisateur)
+        public Boolean verifierNomUtilisateur(string nomUtilisateur)
         {
             RequeteCompteExe rce = new RequeteCompteExe();
             return rce.verifierNomUtilisateur(nomUtilisateur);
         }
 
-        public bool verifierNumeroCarte(string numeroCarte)
+        public Boolean verifierNumeroCarte(string numeroCarte)
         {
             RequeteCompteExe rce = new RequeteCompteExe();
             return rce.verifierNumeroCarte(numeroCarte);

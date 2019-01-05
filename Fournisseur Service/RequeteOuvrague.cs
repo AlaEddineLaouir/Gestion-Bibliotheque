@@ -20,15 +20,33 @@ namespace Fournisseur_Service
             requete += " where code=@cdP";
             return requete;
         }
-        public static String nonDispoOuvrague()
+        public static String validerCode()
         {
-            String requete = "update ouvrague set disponible=false ";
+            String requete = "select etat from ouvrague where code like @cd";
+            return requete;
+        }
+        //Modifier etat Ouvrage
+        public static String etatNonDispoOuvrague()
+        {
+            String requete = "update ouvrague set etat='Non Disponible' ";
             requete += " where code=@cd";
             return requete;
         }
-        public static String dispoOuvrague()
+        public static String etatDispoOuvrague()
         {
-            String requete = "update ouvrague set disponible=true ";
+            String requete = "update ouvrague set etat='Disponible' ";
+            requete += " where code = @cd";
+            return requete;
+        }
+        public static String etatReserverOuvrage()
+        {
+            String requete = "update ouvrague set etat='Reserver' ";
+            requete += " where code=@cd";
+            return requete;
+        }
+        public static String etatEmprenterOuvrague()
+        {
+            String requete = "update ouvrague set etat='Emprenter' ";
             requete += " where code=@cd";
             return requete;
         }
@@ -41,7 +59,7 @@ namespace Fournisseur_Service
         }
         public static String cherhcherOuvrague(String cle)
         {
-            String requete = " select * from ouvrague where code like '%"+cle+ "%' or typeOuvrague like '%" + cle + "%' ";
+            String requete = " select code,typeOuvrague,theme,auteur,titre,etat from ouvrague where code like '%"+cle+ "%' or typeOuvrague like '%" + cle + "%' ";
             requete += " or theme like '%" + cle + "%' or auteur like '%" + cle + "%' or titre like '%" + cle + "%' ";
             return requete;
         }
@@ -62,30 +80,65 @@ namespace Fournisseur_Service
             requete += " values (Now(),true,@nu,@cdO);";
             return requete;
         }
-        
+        public static String terminerEmprente()
+        {
+            String requete = "update emprente set dateRendemant=now() where numSeq=@nmsq ";
+            return requete;
+        }
+
         public static String listEmprinte()
         {
-            String requete = "select * from emprente where codeOuvrague IN (select code from ouvrague where disponible= false) and valider=true and dateReservation  between date_sub(now(), interval 2 week) and date_sub(now(), interval -2 week);";
+            //String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where codeOuvrague IN (select code from ouvrague where etat = false) and valider=true and dateReservation  between date_sub(now(), interval 2 week) and date_sub(now(), interval -2 week);";
+            String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where dateRendemant is null and  codeOuvrague IN (select code from ouvrague where etat = 'Emprenter') and valider=true ;";
+
             return requete;
         }
         public static String listReservation()
         {
-            String requete = "select * from emprente where valider=false and dateReservation  between date_sub(now(), interval 1 day) and date_sub(now(), interval -1 day);  ";
+            //String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where valider=false and dateReservation  between date_sub(now(), interval 1 day) and date_sub(now(), interval -1 day);  ";
+            String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where codeOuvrague IN (select code from ouvrague where etat = 'Reserver') and valider=false ;  ";
+
             return requete;
         }
         public static  String  mesReservation()
         {
-            String requete = "select * from emprente where nomUtilisateur_emprenteur=@nu and valider=false and dateReservation  between date_sub(now(), interval 1 day) and date_sub(now(), interval -1 day);  ";
+            //String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where nomUtilisateur_emprenteur=@nu and valider=false and dateReservation  between date_sub(now(), interval 1 day) and date_sub(now(), interval -1 day);  ";
+            String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where codeOuvrague IN (select code from ouvrague where etat = 'Reserver') and nomUtilisateur_emprenteur=@nu and valider=false ;  ";
+
             return requete;
         }
         public static String mesEmperente()
         {
-            String requete = "select * from emprente where codeOuvrague IN (select code from ouvrague where disponible= false) and nomUtilisateur_emprenteur=@nu and valider=true and dateReservation  between date_sub(now(), interval 2 week) and date_sub(now(), interval -2 week);";
+            String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where dateRendemant is null and codeOuvrague IN (select code from ouvrague where etat = 'Emprenter') and nomUtilisateur_emprenteur=@nu and valider=true ;";
             return requete;
         }
 
-        
+        public static String reservationExpirer()
+        {
+            String requete = "select numSeq , codeOuvrague,e.nomUtilisateur_emprenteur from Emprente e  where ";
+            requete += " valider=false and dateReservation not between date_sub(now(), interval 1 day) and date_sub(now(), interval -1 day) ";
+            return requete;
+        }
+        public static String viderlistattente()
+        {
+            String requete = "delete from list_attente_ouvrague where codeOuvrague=@cdO ;";
+            return requete;
+        }
+        public static String listAttenteOuvrague()
+        {
+            String requete = "select email from Etudiant e, list_attente_ouvrague lao where ";
+            requete += " lao.codeOuvrague=@cdO and lao.nomUtilisateur_emprenteur=e.nomUtilisateur ";
+            requete += " Union  ";
+            requete = "select email from Enseignant e, list_attente_ouvrague lao where ";
+            requete += " lao.codeOuvrague=@cdO and lao.nomUtilisateur_emprenteur=e.nomUtilisateur";
+            return requete;
+        }
+        public static String supprimerReservation()
+        {
+            String requete = "delete from emprente where numSeq=@nmsq ";
+            return requete;
+        }
 
-        
+
     }
 }

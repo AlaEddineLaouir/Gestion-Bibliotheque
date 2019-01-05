@@ -51,6 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AjouterEmprinte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AjouterEmprinte.Designer.cs">
+      <DependentUpon>AjouterEmprinte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ajouterOuvrague.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ajouterOuvrague.Designer.cs">
+      <DependentUpon>ajouterOuvrague.cs</DependentUpon>
+    </Compile>
     <Compile Include="Emprente.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -81,11 +93,41 @@
     <Compile Include="MainUI.Designer.cs">
       <DependentUpon>MainUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModifierEnseignant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifierEnseignant.Designer.cs">
+      <DependentUpon>ModifierEnseignant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModifierEtudiant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifierEtudiant.Designer.cs">
+      <DependentUpon>ModifierEtudiant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModifierOuvrage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifierOuvrage.Designer.cs">
+      <DependentUpon>ModifierOuvrage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ouvrage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Ouvrage.Designer.cs">
       <DependentUpon>Ouvrage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileEtudiant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfileEtudiant.Designer.cs">
+      <DependentUpon>ProfileEtudiant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProfilEnseignant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfilEnseignant.Designer.cs">
+      <DependentUpon>ProfilEnseignant.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +137,12 @@
     <Compile Include="Reservation.Designer.cs">
       <DependentUpon>Reservation.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AjouterEmprinte.resx">
+      <DependentUpon>AjouterEmprinte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ajouterOuvrague.resx">
+      <DependentUpon>ajouterOuvrague.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Emprente.resx">
       <DependentUpon>Emprente.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,8 +158,23 @@
     <EmbeddedResource Include="MainUI.resx">
       <DependentUpon>MainUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModifierEnseignant.resx">
+      <DependentUpon>ModifierEnseignant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModifierEtudiant.resx">
+      <DependentUpon>ModifierEtudiant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModifierOuvrage.resx">
+      <DependentUpon>ModifierOuvrage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ouvrage.resx">
       <DependentUpon>Ouvrage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileEtudiant.resx">
+      <DependentUpon>ProfileEtudiant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfilEnseignant.resx">
+      <DependentUpon>ProfilEnseignant.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -180,6 +243,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backup-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Graphicloads-100-Flat-2-Check-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\validate.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

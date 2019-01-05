@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmailSender.cs" />
     <Compile Include="FournisseurServiceCompte.cs" />
     <Compile Include="FournisseurServiceOuvrague.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="RequeteCompteExe.cs" />
     <Compile Include="RequeteOuvrague.cs" />
     <Compile Include="RequeteOuvragueExe.cs" />
+    <Compile Include="ReservationExpirationHandler.cs" />
     <Compile Include="Serveur.cs" />
   </ItemGroup>
   <ItemGroup>

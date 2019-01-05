@@ -2,6 +2,8 @@
 using ServiceFournis;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
+using System.Data;
+using System.Net.Mail;
 
 namespace Fournisseur_Service
 {
@@ -22,18 +24,18 @@ namespace Fournisseur_Service
         public Ouvrague[] chercherOuvrague(string motCle)
         {
             RequeteOuvragueExe roe = new RequeteOuvragueExe();
-            MySqlDataReader reader = roe.chercherOuvrague(motCle);
+            IDataReader reader = roe.chercherOuvrague(motCle);
             List<Ouvrague> listOuvrague = new List<Ouvrague>();
             while(reader.Read())
             {
                 Ouvrague ouvrague = new Ouvrague();
 
-                ouvrague.Code = reader.GetString("code");
-                ouvrague.Auteur = reader.GetString("auteur");
-                ouvrague.Theme = reader.GetString("theme");
-                ouvrague.Titre = reader.GetString("titre");
-                ouvrague.TypeOuvrague = reader.GetString("typeOuvrague");
-                ouvrague.Disponible = reader.GetBoolean("disponible");
+                ouvrague.Code = reader.GetString(0);
+                ouvrague.Auteur = reader.GetString(3);
+                ouvrague.Theme = reader.GetString(2);
+                ouvrague.Titre = reader.GetString(4);
+                ouvrague.TypeOuvrague = reader.GetString(1);
+                ouvrague.Etat = reader.GetString(5);
 
                 listOuvrague.Add(ouvrague);
             }
@@ -57,16 +59,17 @@ namespace Fournisseur_Service
         {
             RequeteOuvragueExe roe = new RequeteOuvragueExe();
 
-            MySqlDataReader reader = roe.listEmprinte();
+            IDataReader reader = roe.listEmprinte();
             List<Emprinte> emprintes = new List<Emprinte>();
 
             while(reader.Read())
             {
                 Emprinte emprinte = new Emprinte();
 
-                emprinte.DateReservation = reader.GetString("dateReservation");
-                emprinte.CodeOuvrague = reader.GetString("codeOuvrague");
-                emprinte.NomUtilisateurEmprenteur = reader.GetString("nomUtilisateur_emprenteur");
+                emprinte.NumeroEmprinte =reader.GetInt64(0).ToString();
+                emprinte.DateReservation = (reader.GetDateTime(1)).ToString();
+                emprinte.CodeOuvrague = reader.GetString(3);
+                emprinte.NomUtilisateurEmprenteur = reader.GetString(2);
 
                 emprintes.Add(emprinte);
             }
@@ -78,17 +81,17 @@ namespace Fournisseur_Service
         {
             RequeteOuvragueExe roe = new RequeteOuvragueExe();
 
-            MySqlDataReader reader = roe.listReservation();
+            IDataReader reader = roe.listReservation();
             List<Emprinte> emprintes = new List<Emprinte>();
 
             while (reader.Read())
             {
                 Emprinte emprinte = new Emprinte();
 
-                emprinte.NumeroEmprinte = reader.GetInt32("numSeq");
-                emprinte.DateReservation = reader.GetString("dateReservation");
-                emprinte.CodeOuvrague = reader.GetString("codeOuvrague");
-                emprinte.NomUtilisateurEmprenteur = reader.GetString("nomUtilisateur_emprenteur");
+                emprinte.NumeroEmprinte = reader.GetInt64(0).ToString();
+                //emprinte.DateReservation = reader.GetString(1).ToString();
+                emprinte.CodeOuvrague = reader.GetString(3);
+                emprinte.NomUtilisateurEmprenteur = reader.GetString(2);
 
                 emprintes.Add(emprinte);
             }
@@ -100,16 +103,17 @@ namespace Fournisseur_Service
         {
             RequeteOuvragueExe roe = new RequeteOuvragueExe();
 
-            MySqlDataReader reader = roe.mesEmprente(compte);
+            IDataReader reader = roe.mesEmprente(compte);
             List<Emprinte> emprintes = new List<Emprinte>();
 
             while (reader.Read())
             {
                 Emprinte emprinte = new Emprinte();
 
-                emprinte.DateReservation = reader.GetString("dateReservation");
-                emprinte.CodeOuvrague = reader.GetString("codeOuvrague");
-                emprinte.NomUtilisateurEmprenteur = reader.GetString("nomUtilisateur_emprenteur");
+                emprinte.NumeroEmprinte = reader.GetString(0);
+                emprinte.DateReservation = reader.GetString(1);
+                emprinte.CodeOuvrague = reader.GetString(3);
+                emprinte.NomUtilisateurEmprenteur = reader.GetString(2);
 
                 emprintes.Add(emprinte);
             }
@@ -121,17 +125,17 @@ namespace Fournisseur_Service
         {
             RequeteOuvragueExe roe = new RequeteOuvragueExe();
 
-            MySqlDataReader reader = roe.mesReservation(compte);
+            IDataReader reader = roe.mesReservation(compte);
             List<Emprinte> emprintes = new List<Emprinte>();
 
             while (reader.Read())
             {
                 Emprinte emprinte = new Emprinte();
 
-                emprinte.NumeroEmprinte = reader.GetInt32("numSeq");
-                emprinte.DateReservation = reader.GetString("dateReservation");
-                emprinte.CodeOuvrague = reader.GetString("codeOuvrague");
-                emprinte.NomUtilisateurEmprenteur = reader.GetString("nomUtilisateur_emprenteur");
+                emprinte.NumeroEmprinte = reader.GetString(0);
+                emprinte.DateReservation = reader.GetString(1);
+                emprinte.CodeOuvrague = reader.GetString(3);
+                emprinte.NomUtilisateurEmprenteur = reader.GetString(2);
 
                 emprintes.Add(emprinte);
             }
@@ -151,17 +155,40 @@ namespace Fournisseur_Service
             return roe.nonDispoOuvrague(codeOuvrague);
         }
 
+        public bool renderOuvrague(string code, int numEmprente)
+        {
+            RequeteOuvragueExe roe = new RequeteOuvragueExe();
+            Ouvrague o = new Ouvrague();
+            o.Code = code;
+            String[] emails = roe.rendreOuvrague(o,numEmprente);
+
+            EmailSender es = new EmailSender();
+            es.Emails = emails;
+            es.CodeOuvrage = code;
+            es.avertire();
+
+            return true;
+        }
+
         public bool reserverOuvrague(Compte compte, string codeOuvrague)
         {
             RequeteOuvragueExe roe = new RequeteOuvragueExe();
             return roe.reserverOuvrague(compte, codeOuvrague);
         }
 
-        public bool validerReservation(int numeroEmprente)
+        public bool validerReservation(int numeroEmprente , String codeOuvrague)
         {
             RequeteOuvragueExe roe = new RequeteOuvragueExe();
-            return roe.validerReservation(numeroEmprente);
+            return roe.validerReservation(numeroEmprente,codeOuvrague);
         }
 
+        public String verifierCodeOuvrague(string Code)
+        {
+            String resulte= new RequeteOuvragueExe().validerCodeOuvrague(Code);
+            Console.WriteLine("'"+resulte+"'");
+            return resulte; 
+        }
+
+        
     }
 }

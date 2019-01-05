@@ -51,7 +51,7 @@
             // Slide
             // 
             this.Slide.BackColor = System.Drawing.Color.Silver;
-            this.Slide.Location = new System.Drawing.Point(110, 123);
+            this.Slide.Location = new System.Drawing.Point(701, 125);
             this.Slide.Name = "Slide";
             this.Slide.Size = new System.Drawing.Size(286, 6);
             this.Slide.TabIndex = 3;

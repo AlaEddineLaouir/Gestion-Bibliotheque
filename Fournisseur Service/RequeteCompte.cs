@@ -6,17 +6,17 @@ namespace Fournisseur_Service
     {
         public static String chercherCompteEtudiant(String cle)
         {
-            String requete = "select * from emprenteur e , etudiant et where ";
-            requete += "e.nomUtilisteur like '%"+cle+"%' or et.nom like '%"+cle+"%' or et.prenom like '%"+cle+"%' ";
-            requete += " Or numCarte like '%"+cle+"%' or specialite like '%"+cle+"%' or niveua like '%"+cle+"%' ";
+            String requete = "select e.nomUtilisateur,numCarte,nom,prenom,specialite,niveua,email from emprenteur e , etudiant et where e.nomutilisateur=et.nomUtilisateur and  ";
+            requete += " (e.nomUtilisateur like '%"+cle+"%' or et.nom like '%"+cle+"%' or et.prenom like '%"+cle+"%' ";
+            requete += " Or numCarte like '%"+cle+"%' or specialite like '%"+cle+"%' or niveua like '%"+cle+"%' )";
             return requete;
         }
 
         public static String chercherCompteEnseignant(String cle)
         {
-            String requete = "select * from emprenteur e , Enseignant et where ";
-            requete += "e.nomUtilisteur like '%" + cle + "%' or et.nom like '%" + cle + "%' or et.prenom like '%" + cle + "%' ";
-            requete += " Or matricule like '%" + cle + "%' or grade like '%" + cle + "%' ";
+            String requete = "select e.nomUtilisateur,matricule,nom,prenom,grade,email  from emprenteur e , Enseignant et where e.nomutilisateur=et.nomUtilisateur and";
+            requete += " ( e.nomUtilisateur like '%" + cle + "%' or et.nom like '%" + cle + "%' or et.prenom like '%" + cle + "%' ";
+            requete += " Or matricule like '%" + cle + "%' or grade like '%" + cle + "%' )";
             return requete;
         }
         public static String ajouterEmprenteur()
@@ -45,12 +45,12 @@ namespace Fournisseur_Service
         public static String modifierCompteEnsignant()
         {
             String requete = "update Enseignant set nom=@nom , prenom=@prenom , grade=@grd  ";
-            requete += " , email=@email where nomUtilisateur=@nuP ";
+            requete += " , email=@email , matricule=@mat where nomUtilisateur=@nuP ";
             return requete;
         }
         public static String modifierCompte()
         {
-            String requete= "update Emprenteur set nomUtilisateur=@nu , motDePasse=@mp where nomUtilisateur=@nuP";
+            String requete= "update Emprenteur set nomUtilisateur = @nu , motDePasse = @mp where nomUtilisateur = @nuP";
             return requete;
         }
         public static String verifierNomUtilisateur()
@@ -75,22 +75,23 @@ namespace Fournisseur_Service
             requete += " e.nomUtilisateur=et.nomUtilisateur";
             return requete;
         }
+
         public static String activationCompte()
         {
             String requete = "update emprenteur set activer=@etat where nomUtilsateur=@nu";
             return requete;
         }
 
-        public static String compteBanner()
+       
+
+        public static String bannerEmprenteur()
         {
-            String requete = "select banner from emprenteur where nomutilisateur=@nu";
+            String requete = "update emprenteur set numbreFausseReservation=numbreFausseReservation+1 where nomUtilisateur=@nu ";
             return requete;
-
         }
-
         public static String verifierNumCarte()
         {
-            String requete = "Select count(numCarte) from etudiant where numCarte=@numC";
+            String requete = "Select count(numCarte) from etudiant where numCarte=@numC ";
             return requete;
         }
         public static String verfierMatrecule()

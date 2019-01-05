@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using MySql.Data.MySqlClient;
 using ServiceFournis;
 namespace Fournisseur_Service
@@ -7,16 +8,24 @@ namespace Fournisseur_Service
     {
         private MySqlConnection cnx = new MySqlConnection("server=localhost;userid=root;password=admin;database=bibiotheque");
 
-        public MySqlDataReader chercherEtudiant(String cle)
+        public IDataReader chercherEtudiant(String cle)
         {
            try
             {
                 cnx.Open();
                 MySqlCommand chercherEtudiant = cnx.CreateCommand();
                 chercherEtudiant.CommandText = RequeteCompte.chercherCompteEtudiant(cle);
-                return chercherEtudiant.ExecuteReader();
+
+                Console.WriteLine(chercherEtudiant.CommandText);
+
+                DataTable dt = new DataTable();
+                MySqlDataReader msdr= chercherEtudiant.ExecuteReader();
+                dt.Load(msdr);
+
+                return dt.CreateDataReader();
             }catch(Exception e)
             {
+                
                 return null;
             }finally
             {
@@ -25,16 +34,21 @@ namespace Fournisseur_Service
 
         }
 
-        public MySqlDataReader cherhcerEnseignant(String cle)
+        public IDataReader cherhcerEnseignant(String cle)
         {
             try
             {
                 cnx.Open();
                 MySqlCommand cherhcerEnseignant = cnx.CreateCommand();
                 cherhcerEnseignant.CommandText = RequeteCompte.chercherCompteEnseignant(cle);
-                return cherhcerEnseignant.ExecuteReader();
+
+                MySqlDataReader msdr = cherhcerEnseignant.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(msdr);
+                return dt.CreateDataReader();
             }catch(Exception e)
             {
+                Console.WriteLine(e.Message + "-----" + e.StackTrace);
                 return null;
             }finally
             {
@@ -44,14 +58,15 @@ namespace Fournisseur_Service
 
         public Boolean creeCompteEtudiant(CompteEtudiant c)
         {
-            //cree une transaction car plusieur requete sont lieés
-            MySqlTransaction tran=cnx.BeginTransaction();
+            
+           
 
             try
             {
                 //Ouvre la connexion a la base de donnée
                 cnx.Open();
-                
+                //cree une transaction car plusieur requete sont lieés
+                MySqlTransaction tran = cnx.BeginTransaction();
 
                 //Ajouter Empraenteur
                 MySqlCommand ajouterEmpreteur = cnx.CreateCommand();
@@ -60,6 +75,7 @@ namespace Fournisseur_Service
                 ajouterEmpreteur.Parameters.Add("@nu", MySqlDbType.VarChar).Value = c.Nom_utilisteur;
                 ajouterEmpreteur.Parameters.Add("@mp", MySqlDbType.VarChar).Value = c.Mot_passe;
                 ajouterEmpreteur.ExecuteNonQuery();
+
 
                 //Ajouter Info personnelle de l'etudiant
                 MySqlCommand ajouterEtudiant = cnx.CreateCommand();
@@ -80,7 +96,7 @@ namespace Fournisseur_Service
                 return true;
             }catch(Exception e)
             {
-                tran.Rollback();
+                Console.WriteLine(e.StackTrace + "-----" + e.Message);
                 return false;
             }
             finally
@@ -91,14 +107,15 @@ namespace Fournisseur_Service
 
         public Boolean creeCompteEnseignant(CompteEnseigant c)
         {
-            //cree une transaction car plusieur requete sont lieés
-            MySqlTransaction tran = cnx.BeginTransaction();
+            
 
             try
             {
                 //Ouvre la connexion a la base de donnée
                 cnx.Open();
 
+                //cree une transaction car plusieur requete sont lieés
+                MySqlTransaction tran = cnx.BeginTransaction();
 
                 //Ajouter Empraenteur
                 MySqlCommand ajouterEmpreteur = cnx.CreateCommand();
@@ -108,9 +125,11 @@ namespace Fournisseur_Service
                 ajouterEmpreteur.Parameters.Add("@mp", MySqlDbType.VarChar).Value = c.Mot_passe;
                 ajouterEmpreteur.ExecuteNonQuery();
 
+                Console.WriteLine(ajouterEmpreteur.CommandText);
+
                 //Ajouter Info personnelle de l'enseignant
                 MySqlCommand ajouterEnseignant = cnx.CreateCommand();
-                ajouterEnseignant.CommandText = RequeteCompte.ajouterEtudiant();
+                ajouterEnseignant.CommandText = RequeteCompte.ajouterEnseignant();
                 ajouterEnseignant.Transaction = tran;
                 ajouterEnseignant.Parameters.Add("@nu", MySqlDbType.VarChar).Value = c.Nom_utilisteur;
                 ajouterEnseignant.Parameters.Add("@nom", MySqlDbType.VarChar).Value = c.Nom;
@@ -119,6 +138,8 @@ namespace Fournisseur_Service
                 ajouterEnseignant.Parameters.Add("@grd", MySqlDbType.VarChar).Value = c.Grade;
                 ajouterEnseignant.Parameters.Add("@email", MySqlDbType.VarChar).Value = c.Email;
 
+                ajouterEnseignant.CommandTimeout = 300;
+                Console.WriteLine(ajouterEnseignant.CommandText);
                 ajouterEnseignant.ExecuteNonQuery();
 
                 tran.Commit();
@@ -127,7 +148,7 @@ namespace Fournisseur_Service
             }
             catch (Exception e)
             {
-                tran.Rollback();
+                Console.WriteLine(e.Message + "----" + e.StackTrace);
                 return false;
             }
             finally
@@ -140,11 +161,11 @@ namespace Fournisseur_Service
         public Boolean modifierCompteEtudiant(String nomUtilisateur, CompteEtudiant c)
         {
             
-            MySqlTransaction tran = cnx.BeginTransaction();
+           
             try
             {
                 cnx.Open();
-
+                MySqlTransaction tran = cnx.BeginTransaction();
                 MySqlCommand modifierLogin = cnx.CreateCommand();
                 modifierLogin.Transaction = tran;
                 modifierLogin.CommandText = RequeteCompte.modifierCompte();
@@ -152,7 +173,9 @@ namespace Fournisseur_Service
                 modifierLogin.Parameters.Add("@nu", MySqlDbType.VarChar).Value = c.Nom_utilisteur;
                 modifierLogin.Parameters.Add("@mp", MySqlDbType.VarChar).Value = c.Mot_passe;
                 modifierLogin.Parameters.Add("@nuP", MySqlDbType.VarChar).Value = nomUtilisateur;
+                Console.WriteLine(modifierLogin.CommandText);
                 modifierLogin.ExecuteNonQuery();
+               
 
                 MySqlCommand modifierInfoEtudiant = cnx.CreateCommand();
                 modifierInfoEtudiant.Transaction = tran;
@@ -171,7 +194,7 @@ namespace Fournisseur_Service
                 return true;
             }catch(Exception e )
             {
-                tran.Rollback();
+                Console.WriteLine(e.StackTrace + "-----" + e.Message);
                 return false;
             }
             finally
@@ -182,11 +205,11 @@ namespace Fournisseur_Service
 
         public Boolean modiferCompteEnseignant(String nomUtilisateur , CompteEnseigant c)
         {
-            MySqlTransaction tran = cnx.BeginTransaction();
+           
             try
             {
                 cnx.Open();
-
+                MySqlTransaction tran = cnx.BeginTransaction();
                 MySqlCommand modifierLogin = cnx.CreateCommand();
                 modifierLogin.Transaction = tran;
                 modifierLogin.CommandText = RequeteCompte.modifierCompte();
@@ -198,13 +221,14 @@ namespace Fournisseur_Service
 
                 MySqlCommand modifierInfoEnseignant = cnx.CreateCommand();
                 modifierInfoEnseignant.Transaction = tran;
-                modifierInfoEnseignant.CommandText = RequeteCompte.modifierCompteEtudiant();
+                modifierInfoEnseignant.CommandText = RequeteCompte.modifierCompteEnsignant();
 
                 modifierInfoEnseignant.Parameters.Add("@nom", MySqlDbType.VarChar).Value = c.Nom;
                 modifierInfoEnseignant.Parameters.Add("@prenom", MySqlDbType.VarChar).Value = c.Prenom;
                 modifierInfoEnseignant.Parameters.Add("@grd", MySqlDbType.VarChar).Value = c.Grade;
                 modifierInfoEnseignant.Parameters.Add("@email", MySqlDbType.VarChar).Value = c.Email;
                 modifierInfoEnseignant.Parameters.Add("@nuP", MySqlDbType.VarChar).Value = c.Nom_utilisteur;
+                modifierInfoEnseignant.Parameters.Add("@mat", MySqlDbType.VarChar).Value = c.Matrecule;
 
                 modifierInfoEnseignant.ExecuteNonQuery();
                 tran.Commit();
@@ -213,7 +237,7 @@ namespace Fournisseur_Service
             }
             catch (Exception e)
             {
-                tran.Rollback();
+                Console.WriteLine(e.Message+"-----"+e.StackTrace);
                 return false;
             }
             finally
@@ -280,17 +304,20 @@ namespace Fournisseur_Service
                 verifier.CommandText = RequeteCompte.verifierNomUtilisateur();
 
                 verifier.Parameters.Add("@nu", MySqlDbType.VarChar).Value = nomUtilisateur;
-                int count =(int) verifier.ExecuteScalar();
+                String result =verifier.ExecuteScalar().ToString();
 
-                if (count > 0)
+                if (result.Equals("0"))
                 {
-                    return false;
-                }else
-                {
+                    Console.WriteLine(result.Equals("0"));
                     return true;
                 }
-                
-            }catch(Exception e)
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch(Exception e)
             {
                 return false;
             }finally
@@ -307,21 +334,30 @@ namespace Fournisseur_Service
                 MySqlCommand verifier = cnx.CreateCommand();
                 verifier.CommandText = RequeteCompte.verifierNumCarte();
 
-                verifier.Parameters.Add("@numC", MySqlDbType.VarChar).Value = numCarte;
-                int count = (int)verifier.ExecuteScalar();
 
-                if (count > 0)
+
+                verifier.Parameters.Add("@numC", MySqlDbType.String).Value = numCarte; ;
+
+                Console.WriteLine(verifier.CommandText);
+
+                String result = verifier.ExecuteScalar().ToString();
+
+
+
+                if (result.Equals("0"))
                 {
-                    return false;
+                    Console.WriteLine(result.Equals("0"));
+                    return true;
                 }
                 else
                 {
-                    return true;
+                    return false;
                 }
 
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.StackTrace + "-------" + e.Message);
                 return false;
             }
             finally
@@ -339,15 +375,16 @@ namespace Fournisseur_Service
                 verifier.CommandText = RequeteCompte.verfierMatrecule();
 
                 verifier.Parameters.Add("@mat", MySqlDbType.VarChar).Value = matrecule;
-                int count = (int)verifier.ExecuteScalar();
+                String result = verifier.ExecuteScalar().ToString();
 
-                if (count > 0)
+                if (result.Equals("0"))
                 {
-                    return false;
+                    Console.WriteLine(result.Equals("0"));
+                    return true;
                 }
                 else
                 {
-                    return true;
+                    return false;
                 }
 
             }
@@ -361,6 +398,30 @@ namespace Fournisseur_Service
             }
         }
 
+        public Boolean bannerEmprenteurs(String[] utilisateurBanner)
+        {
+            try
+            {
+                cnx.Open();
+                foreach (String nomU in utilisateurBanner)
+                {
+                    MySqlCommand banner = cnx.CreateCommand();
 
+                    banner.CommandText = RequeteCompte.bannerEmprenteur();
+                    banner.Parameters.Add("@nu", MySqlDbType.VarChar).Value = nomU;
+
+                    banner.ExecuteNonQuery();
+                }
+                return true;
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message + "----" + e.StackTrace);
+                return false;
+            }
+            finally
+            {
+                cnx.Dispose();
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace ServiceFournis
         private String auteur;
         private String titre;
         private String code;
-        private Boolean disponible;
+        private String etat;
 
 
        
@@ -21,6 +21,6 @@ namespace ServiceFournis
         public string Auteur { get => auteur; set => auteur = value; }
         public string Titre { get => titre; set => titre = value; }
         public string Code { get => code; set => code = value; }
-        public bool Disponible { get => disponible; set => disponible = value; }
+        public String Etat { get => etat; set => etat = value; }
     }
 }

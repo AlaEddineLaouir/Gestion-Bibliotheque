@@ -28,89 +28,63 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.delete = new Bunifu.Framework.UI.BunifuImageButton();
-            this.set = new Bunifu.Framework.UI.BunifuImageButton();
-            this.add = new Bunifu.Framework.UI.BunifuImageButton();
+            this.valider = new Bunifu.Framework.UI.BunifuImageButton();
             this.GridReservation = new Bunifu.Framework.UI.BunifuCustomDataGrid();
             this.NumereCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateReservation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmprenteurCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CodeOuvCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.delete)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.set)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.add)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridReservation)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.delete);
-            this.panel1.Controls.Add(this.set);
-            this.panel1.Controls.Add(this.add);
+            this.panel1.Controls.Add(this.valider);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(944, 130);
             this.panel1.TabIndex = 1;
             // 
-            // delete
+            // valider
             // 
-            this.delete.BackColor = System.Drawing.Color.White;
-            this.delete.Image = global::BiblioUI.Properties.Resources.close;
-            this.delete.ImageActive = null;
-            this.delete.Location = new System.Drawing.Point(570, 24);
-            this.delete.Name = "delete";
-            this.delete.Size = new System.Drawing.Size(71, 71);
-            this.delete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.delete.TabIndex = 2;
-            this.delete.TabStop = false;
-            this.delete.Zoom = 10;
-            // 
-            // set
-            // 
-            this.set.BackColor = System.Drawing.Color.White;
-            this.set.Image = global::BiblioUI.Properties.Resources.gear;
-            this.set.ImageActive = null;
-            this.set.Location = new System.Drawing.Point(402, 24);
-            this.set.Name = "set";
-            this.set.Size = new System.Drawing.Size(71, 71);
-            this.set.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.set.TabIndex = 1;
-            this.set.TabStop = false;
-            this.set.Zoom = 10;
-            // 
-            // add
-            // 
-            this.add.BackColor = System.Drawing.Color.White;
-            this.add.Image = global::BiblioUI.Properties.Resources.add;
-            this.add.ImageActive = null;
-            this.add.Location = new System.Drawing.Point(227, 23);
-            this.add.Name = "add";
-            this.add.Size = new System.Drawing.Size(71, 71);
-            this.add.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.add.TabIndex = 0;
-            this.add.TabStop = false;
-            this.add.Zoom = 10;
+            this.valider.BackColor = System.Drawing.Color.White;
+            this.valider.Image = global::BiblioUI.Properties.Resources.validate;
+            this.valider.ImageActive = null;
+            this.valider.Location = new System.Drawing.Point(509, 27);
+            this.valider.Name = "valider";
+            this.valider.Size = new System.Drawing.Size(71, 71);
+            this.valider.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.valider.TabIndex = 1;
+            this.valider.TabStop = false;
+            this.valider.Zoom = 10;
+            this.valider.Click += new System.EventHandler(this.valider_Click);
             // 
             // GridReservation
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.GridReservation.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.GridReservation.AllowUserToAddRows = false;
+            this.GridReservation.AllowUserToDeleteRows = false;
+            this.GridReservation.AllowUserToOrderColumns = true;
+            this.GridReservation.AllowUserToResizeColumns = false;
+            this.GridReservation.AllowUserToResizeRows = false;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.GridReservation.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.GridReservation.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.GridReservation.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GridReservation.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.GridReservation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GridReservation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.GridReservation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridReservation.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NumereCol,
@@ -125,12 +99,16 @@
             this.GridReservation.Location = new System.Drawing.Point(0, 130);
             this.GridReservation.Name = "GridReservation";
             this.GridReservation.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.GridReservation.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GridReservation.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            this.GridReservation.RowTemplate.Height = 40;
             this.GridReservation.Size = new System.Drawing.Size(944, 387);
             this.GridReservation.TabIndex = 2;
             // 
             // NumereCol
             // 
             this.NumereCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NumereCol.DataPropertyName = "1";
             this.NumereCol.HeaderText = "Numero Reservation";
             this.NumereCol.Name = "NumereCol";
             this.NumereCol.ReadOnly = true;
@@ -138,6 +116,7 @@
             // DateReservation
             // 
             this.DateReservation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DateReservation.DataPropertyName = "2";
             this.DateReservation.HeaderText = "Date Reservation";
             this.DateReservation.Name = "DateReservation";
             this.DateReservation.ReadOnly = true;
@@ -145,6 +124,7 @@
             // EmprenteurCol
             // 
             this.EmprenteurCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.EmprenteurCol.DataPropertyName = "3";
             this.EmprenteurCol.HeaderText = "Emprenteur";
             this.EmprenteurCol.Name = "EmprenteurCol";
             this.EmprenteurCol.ReadOnly = true;
@@ -152,6 +132,7 @@
             // CodeOuvCol
             // 
             this.CodeOuvCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CodeOuvCol.DataPropertyName = "4";
             this.CodeOuvCol.HeaderText = "Code Ouvrage";
             this.CodeOuvCol.Name = "CodeOuvCol";
             this.CodeOuvCol.ReadOnly = true;
@@ -166,9 +147,7 @@
             this.Name = "Reservation";
             this.Size = new System.Drawing.Size(944, 517);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.delete)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.set)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.add)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridReservation)).EndInit();
             this.ResumeLayout(false);
 
@@ -177,9 +156,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private Bunifu.Framework.UI.BunifuImageButton delete;
-        private Bunifu.Framework.UI.BunifuImageButton set;
-        private Bunifu.Framework.UI.BunifuImageButton add;
+        private Bunifu.Framework.UI.BunifuImageButton valider;
         private Bunifu.Framework.UI.BunifuCustomDataGrid GridReservation;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumereCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateReservation;
