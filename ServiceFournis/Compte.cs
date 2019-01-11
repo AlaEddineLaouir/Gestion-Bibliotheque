@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ServiceFournis
 {
     [Serializable]
+    [DataContract]
     public class Compte
     {
-        
-        private Boolean compteEtudiant;
-        protected String nom_utilisteur;
-        protected String mot_passe;
-        protected String nom;
-        protected String prenom;
+
+        [DataMember] private Boolean compteEtudiant;
+        [DataMember] protected String nom_utilisteur;
+        [DataMember] protected String mot_passe;
+        [DataMember] protected String nom;
+        [DataMember] protected String prenom;
 
         
 

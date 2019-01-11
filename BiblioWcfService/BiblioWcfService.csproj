@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CompteService.svc" />
+    <Content Include="OuvrageService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +71,12 @@
       <DependentUpon>CompteService.svc</DependentUpon>
     </Compile>
     <Compile Include="ICompteService.cs" />
+    <Compile Include="IOuvrageService.cs" />
+    <Compile Include="OuvrageService.svc.cs">
+      <DependentUpon>OuvrageService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SingltonRemoteObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,17 +1,18 @@
 ﻿using System;
-
+using System.Runtime.Serialization;
 
 namespace ServiceFournis
 {
     [Serializable]
+    [DataContract]
     public class Ouvrague
     {
-        private String typeOuvrague;
-        private String theme;
-        private String auteur;
-        private String titre;
-        private String code;
-        private String etat;
+        [DataMember] private String typeOuvrague;
+        [DataMember] private String theme;
+        [DataMember] private String auteur;
+        [DataMember] private String titre;
+        [DataMember] private String code;
+        [DataMember] private String etat;
 
 
        

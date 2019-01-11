@@ -13,5 +13,6 @@ namespace ServiceFournis
         Boolean attendreOuvrague(Compte compte, String codeOuvrague);
         Emprinte[] mesReservation(Compte compte);
         Emprinte[] mesEmprintes(Compte compte);
+        String verifierCodeOuvrague(String Code);
     }
 }

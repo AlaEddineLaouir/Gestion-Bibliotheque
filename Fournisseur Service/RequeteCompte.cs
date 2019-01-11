@@ -66,7 +66,7 @@ namespace Fournisseur_Service
         public static String loginEtudiant()
         {
             String requete = "select * from Emprenteur e ,Etudiant et where e.nomutilisateur=@nu and e.motdepasse=@mp  ";
-            requete += " e.nomUtilisateur=et.nomUtilisateur";
+            requete += " and e.nomUtilisateur=et.nomUtilisateur";
             return requete;
         }
         public static String loginEnseignant()

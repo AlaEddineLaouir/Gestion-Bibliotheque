@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ServiceFournis
 {
     [Serializable]
+    [DataContract]
     public class CompteEtudiant : Compte
     {
         //Information de l'etudiant
-        
-        private String specialite;
-        private String niveau;
-        private String numeroCarte;
-        private String email;
+
+        [DataMember] private String specialite;
+        [DataMember] private String niveau;
+        [DataMember] private String numeroCarte;
+        [DataMember] private String email;
 
         
         public string Specialite { get => specialite; set => specialite = value; }

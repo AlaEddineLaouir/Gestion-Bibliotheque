@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ServiceFournis
 {
     [Serializable]
+    [DataContract]
     public class Emprinte
     {
-        private String dateReservation;
-        private bool valider;
-        private String nomUtilisateurEmprenteur;
-        private String codeOuvrague;
-        private String numeroEmprinte;
+        [DataMember] private String dateReservation;
+        [DataMember] private bool valider;
+        [DataMember] private String nomUtilisateurEmprenteur;
+        [DataMember] private String codeOuvrague;
+        [DataMember] private String numeroEmprinte;
         
 
         public string DateReservation { get => dateReservation; set => dateReservation = value; }

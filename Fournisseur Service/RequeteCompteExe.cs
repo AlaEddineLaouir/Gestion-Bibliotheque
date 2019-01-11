@@ -247,7 +247,7 @@ namespace Fournisseur_Service
 
         }
 
-        public Object seConnectEtudiant(String nomUtilisateur, String motPasse)
+        public CompteEtudiant seConnectEtudiant(String nomUtilisateur, String motPasse)
         {
             try
             {
@@ -258,7 +258,21 @@ namespace Fournisseur_Service
                 login.Parameters.Add("@nu", MySqlDbType.VarChar).Value = nomUtilisateur;
                 login.Parameters.Add("@mp", MySqlDbType.VarChar).Value = motPasse;
 
-                return login.ExecuteScalar();
+
+                MySqlDataReader msdr= login.ExecuteReader();
+                CompteEtudiant ce=null;
+
+                while(msdr.Read())
+                {
+                    ce = new CompteEtudiant();
+                    ce.Nom = msdr.GetString("nom");
+                    ce.Prenom = msdr.GetString("prenom");
+                    ce.NumeroCarte = msdr.GetString("numCarte");
+                    ce.Specialite = msdr.GetString("specialite");
+                    ce.Niveau = msdr.GetString("niveua");
+                    ce.Email = msdr.GetString("email");
+                }
+                return ce;
 
             }catch(Exception e)
             {
@@ -270,7 +284,7 @@ namespace Fournisseur_Service
                 cnx.Dispose();
             }
         }
-        public Object seConnecterEnseignant(String nomUtilisateur , String motPasse)
+        public CompteEnseigant seConnecterEnseignant(String nomUtilisateur , String motPasse)
         {
             try
             {
@@ -281,7 +295,21 @@ namespace Fournisseur_Service
                 login.Parameters.Add("@nu", MySqlDbType.VarChar).Value = nomUtilisateur;
                 login.Parameters.Add("@mp", MySqlDbType.VarChar).Value = motPasse;
 
-                return login.ExecuteScalar();
+                MySqlDataReader msdr = login.ExecuteReader();
+                CompteEnseigant ce = null;
+
+                while(msdr.Read())
+                {
+                    ce = new CompteEnseigant();
+
+                    ce.Nom = msdr.GetString("nom");
+                    ce.Prenom = msdr.GetString("prenom");
+                    ce.Matrecule = msdr.GetString("matricule");
+                    ce.Grade = msdr.GetString("grade");
+                    ce.Email = msdr.GetString("email");
+                }
+
+                return ce;
 
             }
             catch (Exception e)

@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ServiceFournis
 {
     [Serializable]
+    [DataContract]
     public class CompteEnseigant : Compte
     {
-       
-        private String grade;
-        private String matrecule;
-        private String email;
+
+        [DataMember] private String grade;
+        [DataMember] private String matrecule;
+        [DataMember] private String email;
         
 
        

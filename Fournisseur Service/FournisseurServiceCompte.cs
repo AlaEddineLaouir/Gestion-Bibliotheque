@@ -86,13 +86,14 @@ namespace Fournisseur_Service
         public CompteEnseigant seConnecterEnseignant(string nomUtilisateur, string motPasse)
         {
             RequeteCompteExe rce = new RequeteCompteExe();
-            return (CompteEnseigant)rce.seConnecterEnseignant(nomUtilisateur, motPasse);
+            return rce.seConnecterEnseignant(nomUtilisateur, motPasse);
         }
 
         public CompteEtudiant seConnecterEtudaint(string nomUtilisateur, string motPasse)
         {
             RequeteCompteExe rce = new RequeteCompteExe();
-            return (CompteEtudiant)rce.seConnectEtudiant(nomUtilisateur, motPasse);
+            CompteEtudiant ce =rce.seConnectEtudiant(nomUtilisateur, motPasse);
+            return ce;
         }
 
         
