@@ -71,7 +71,7 @@ namespace Fournisseur_Service
         }
         public static String loginEnseignant()
         {
-            String requete = "select * from Emprenteur e ,Enseignant et where e.nomutilisateur=@nu and e.motdepasse=@mp  ";
+            String requete = "select * from Emprenteur e ,Enseignant et where e.nomutilisateur=@nu and e.motdepasse=@mp and ";
             requete += " e.nomUtilisateur=et.nomUtilisateur";
             return requete;
         }

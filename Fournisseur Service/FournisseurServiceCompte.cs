@@ -92,9 +92,7 @@ namespace Fournisseur_Service
         public CompteEtudiant seConnecterEtudaint(string nomUtilisateur, string motPasse)
         {
             RequeteCompteExe rce = new RequeteCompteExe();
-            CompteEtudiant ce =rce.seConnectEtudiant(nomUtilisateur, motPasse);
-            Console.WriteLine("Connexion : "+ce.Nom_utilisteur);
-            return ce;
+            return rce.seConnectEtudiant(nomUtilisateur, motPasse);
         }
 
         
