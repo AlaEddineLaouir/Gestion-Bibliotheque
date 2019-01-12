@@ -21,6 +21,7 @@ namespace BiblioWcfService
 
         public CompteService() : base()
         {
+            
             sro = SingltonRemoteObject.createInstance();
         }  
 

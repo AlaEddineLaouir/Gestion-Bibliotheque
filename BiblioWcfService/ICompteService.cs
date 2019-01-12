@@ -16,39 +16,39 @@ namespace BiblioWcfService
 
 
         [OperationContract]
-        [WebInvoke(Method ="GET",UriTemplate = "/LogInEtudiant/{nomUtilisateur}/{motPasse}", RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        [WebGet(UriTemplate = "/LogInEtudiant/{nomUtilisateur}/{motPasse}",ResponseFormat =WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         CompteEtudiant seConnecterEtudaint(String nomUtilisateur, String motPasse);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "/LogInEnsiegnant/{nomUtilisateur}/{motPasse}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        [WebGet( UriTemplate = "/LogInEnsiegnant/{nomUtilisateur}/{motPasse}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         CompteEnseigant seConnecterEnseignant(String nomUtilisateur, String motPasse);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "/SignInEtudiant", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        [WebInvoke(Method = "POST", UriTemplate = "/SignInEtudiant", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Boolean creeCompteEtudiant(CompteEtudiant c);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "/SignInEnseignant", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        [WebInvoke(Method = "POST", UriTemplate = "/SignInEnseignant", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Boolean creeCompteEnseignant(CompteEnseigant c);
 
-        [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "/SetEtudiant", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        /*[OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "/SetEtudiant", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Boolean modifierCompteEtudiant(CompteEtudiant ancien, CompteEtudiant compteNouveau);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "/SetEnseignant", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
-        Boolean modifierCompteEnseignant(CompteEnseigant ancien, CompteEnseigant compteNouveau);
+        [WebInvoke(Method = "POST", UriTemplate = "/SetEnseignant", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Boolean modifierCompteEnseignant(CompteEnseigant ancien, CompteEnseigant compteNouveau);*/
 
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "/CheckUserName/{nomUtilisateur}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        [WebInvoke(Method = "GET", UriTemplate = "/CheckUserName/{nomUtilisateur}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Boolean verifierNomUtilisateur(String nomUtilisateur);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "/CheckCardNumbre/{numeroCarte}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        [WebInvoke(Method = "GET", UriTemplate = "/CheckCardNumbre/{numeroCarte}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Boolean verifierNumeroCarte(String numeroCarte);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "/CheckSeqNumbre/{matrecule}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        [WebInvoke(Method = "GET", UriTemplate = "/CheckSeqNumbre/{matrecule}", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Boolean verifierMatrecule(String matrecule);
     }
 }

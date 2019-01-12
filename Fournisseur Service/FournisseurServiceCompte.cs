@@ -93,6 +93,7 @@ namespace Fournisseur_Service
         {
             RequeteCompteExe rce = new RequeteCompteExe();
             CompteEtudiant ce =rce.seConnectEtudiant(nomUtilisateur, motPasse);
+            Console.WriteLine("Connexion : "+ce.Nom_utilisteur);
             return ce;
         }
 
