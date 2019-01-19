@@ -47,7 +47,7 @@ namespace BiblioUI
             Compte c = new Compte();
             c.Nom_utilisteur = nomU.Text;
             String codeO = code.Text;
-            Boolean result = MainUI.sbo.emprinterOuvrague(c,codeO);
+            Boolean result = MainUI.sbo.emprinterOuvrague(c.Nom_utilisteur,codeO);
             if(result)
             {
                 this.Close();

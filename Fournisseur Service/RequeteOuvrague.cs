@@ -89,27 +89,27 @@ namespace Fournisseur_Service
         public static String listEmprinte()
         {
             //String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where codeOuvrague IN (select code from ouvrague where etat = false) and valider=true and dateReservation  between date_sub(now(), interval 2 week) and date_sub(now(), interval -2 week);";
-            String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where dateRendemant is null and  codeOuvrague IN (select code from ouvrague where etat = 'Emprenter') and valider=true ;";
+            String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where dateRendemant is null and  valider=true ;";
 
             return requete;
         }
         public static String listReservation()
         {
             //String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where valider=false and dateReservation  between date_sub(now(), interval 1 day) and date_sub(now(), interval -1 day);  ";
-            String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where codeOuvrague IN (select code from ouvrague where etat = 'Reserver') and valider=false ;  ";
+            String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where  valider=false ;  ";
 
             return requete;
         }
         public static  String  mesReservation()
         {
             //String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where nomUtilisateur_emprenteur=@nu and valider=false and dateReservation  between date_sub(now(), interval 1 day) and date_sub(now(), interval -1 day);  ";
-            String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where codeOuvrague IN (select code from ouvrague where etat = 'Reserver') and nomUtilisateur_emprenteur=@nu and valider=false ;  ";
+            String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where nomUtilisateur_emprenteur=@nu and valider=false ;  ";
 
             return requete;
         }
         public static String mesEmperente()
         {
-            String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where dateRendemant is null and codeOuvrague IN (select code from ouvrague where etat = 'Emprenter') and nomUtilisateur_emprenteur=@nu and valider=true ;";
+            String requete = "select numSeq,dateReservation,nomUtilisateur_emprenteur,codeOuvrague from emprente where dateRendemant is null and nomUtilisateur_emprenteur=@nu and valider=true ;";
             return requete;
         }
 

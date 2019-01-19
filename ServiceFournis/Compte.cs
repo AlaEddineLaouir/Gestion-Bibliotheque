@@ -12,7 +12,7 @@ namespace ServiceFournis
     public class Compte
     {
 
-        [DataMember] private Boolean compteEtudiant;
+        
         [DataMember] protected String nom_utilisteur;
         [DataMember] protected String mot_passe;
         [DataMember] protected String nom;
@@ -25,6 +25,5 @@ namespace ServiceFournis
         public string Nom { get => nom; set => nom = value; }
         public string Prenom { get => prenom; set => prenom = value; }
         
-        public bool CompteEtudiant { get => compteEtudiant; set => compteEtudiant = value; }
     }
 }

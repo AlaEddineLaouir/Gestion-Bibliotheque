@@ -15,10 +15,12 @@ namespace Fournisseur_Service
             return roe.ajouterOuvrague(ouvrague);
         }
 
-        public bool attendreOuvrague(Compte compte, string codeOuvrague)
+        public bool attendreOuvrague(String nomUtilisateur, string codeOuvrague)
         {
             RequeteOuvragueExe roe = new RequeteOuvragueExe();
-            return roe.attendreOuvrague(compte, codeOuvrague);
+            Compte c = new Compte();
+            c.Nom_utilisteur = nomUtilisateur;
+            return roe.attendreOuvrague(c, codeOuvrague);
         }
 
         public Ouvrague[] chercherOuvrague(string motCle)
@@ -49,9 +51,11 @@ namespace Fournisseur_Service
             return roe.dispoOuvrague(codeOuvrague);
         }
 
-        public bool emprinterOuvrague(Compte compte, string codeOuvrague)
+        public bool emprinterOuvrague(String nomUtilisateur, string codeOuvrague)
         {
             RequeteOuvragueExe roe = new RequeteOuvragueExe();
+            Compte compte = new Compte();
+            compte.Nom_utilisteur = nomUtilisateur;
             return roe.emprenterOuvrague(compte, codeOuvrague);
         }
 
@@ -89,7 +93,7 @@ namespace Fournisseur_Service
                 Emprinte emprinte = new Emprinte();
 
                 emprinte.NumeroEmprinte = reader.GetInt64(0).ToString();
-                //emprinte.DateReservation = reader.GetString(1).ToString();
+                emprinte.DateReservation = (reader.GetDateTime(1)).ToString();
                 emprinte.CodeOuvrague = reader.GetString(3);
                 emprinte.NomUtilisateurEmprenteur = reader.GetString(2);
 
@@ -99,32 +103,43 @@ namespace Fournisseur_Service
             return emprintes.ToArray();
         }
 
-        public Emprinte[] mesEmprintes(Compte compte)
+        public Emprinte[] mesEmprintes(String nomUtilisateur)
         {
-            RequeteOuvragueExe roe = new RequeteOuvragueExe();
-
-            IDataReader reader = roe.mesEmprente(compte);
             List<Emprinte> emprintes = new List<Emprinte>();
-
-            while (reader.Read())
+            try
             {
-                Emprinte emprinte = new Emprinte();
+                RequeteOuvragueExe roe = new RequeteOuvragueExe();
+                Compte compte = new Compte();
+                compte.Nom_utilisteur = nomUtilisateur;
+                IDataReader reader = roe.mesEmprente(compte);
 
-                emprinte.NumeroEmprinte = reader.GetString(0);
-                emprinte.DateReservation = reader.GetString(1);
-                emprinte.CodeOuvrague = reader.GetString(3);
-                emprinte.NomUtilisateurEmprenteur = reader.GetString(2);
 
-                emprintes.Add(emprinte);
+                while (reader.Read())
+                {
+                    Emprinte emprinte = new Emprinte();
+
+                    emprinte.NumeroEmprinte = reader.GetInt64(0).ToString();
+                    emprinte.DateReservation = (reader.GetDateTime(1)).ToString();
+                    emprinte.CodeOuvrague = reader.GetString(3);
+                    emprinte.NomUtilisateurEmprenteur = reader.GetString(2);
+
+                    emprintes.Add(emprinte);
+                }
+
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message + "-----" + e.StackTrace);
             }
 
             return emprintes.ToArray();
         }
 
-        public Emprinte[] mesReservation(Compte compte)
+        public Emprinte[] mesReservation(String nomUtilisateur)
         {
             RequeteOuvragueExe roe = new RequeteOuvragueExe();
-
+            Compte compte = new Compte();
+            compte.Nom_utilisteur = nomUtilisateur;
             IDataReader reader = roe.mesReservation(compte);
             List<Emprinte> emprintes = new List<Emprinte>();
 
@@ -132,8 +147,8 @@ namespace Fournisseur_Service
             {
                 Emprinte emprinte = new Emprinte();
 
-                emprinte.NumeroEmprinte = reader.GetString(0);
-                emprinte.DateReservation = reader.GetString(1);
+                emprinte.NumeroEmprinte = reader.GetInt64(0).ToString();
+                emprinte.DateReservation = (reader.GetDateTime(1)).ToString();
                 emprinte.CodeOuvrague = reader.GetString(3);
                 emprinte.NomUtilisateurEmprenteur = reader.GetString(2);
 
@@ -170,9 +185,11 @@ namespace Fournisseur_Service
             return true;
         }
 
-        public bool reserverOuvrague(Compte compte, string codeOuvrague)
+        public bool reserverOuvrague(String nomUtilisateur, string codeOuvrague)
         {
             RequeteOuvragueExe roe = new RequeteOuvragueExe();
+            Compte compte = new Compte();
+            compte.Nom_utilisteur = nomUtilisateur;
             return roe.reserverOuvrague(compte, codeOuvrague);
         }
 

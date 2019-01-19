@@ -40,5 +40,22 @@ namespace BiblioUIEmprenteur
             }
 
         }
+
+        private void bunifuTileButton5_Click(object sender, EventArgs e)
+        {
+            ouvrage1.BringToFront();
+        }
+
+        private void bunifuTileButton3_Click(object sender, EventArgs e)
+        {
+            emprente1.listEmprentes();
+            emprente1.BringToFront();
+        }
+
+        private void bunifuTileButton2_Click(object sender, EventArgs e)
+        {
+            reservation1.listReservation();
+            reservation1.BringToFront();
+        }
     }
 }

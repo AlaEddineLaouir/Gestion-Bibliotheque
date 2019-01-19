@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ServiceFournis" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ServiceFournis" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="CompteEtudiant">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Compte">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="niveau" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="numeroCarte" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="specialite" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompteEtudiant" nillable="true" type="tns:CompteEtudiant" />
+  <xs:complexType name="Compte">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="mot_passe" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nom" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nom_utilisteur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="prenom" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Compte" nillable="true" type="tns:Compte" />
+  <xs:complexType name="CompteEnseigant">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Compte">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="grade" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="matrecule" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompteEnseigant" nillable="true" type="tns:CompteEnseigant" />
+  <xs:complexType name="ArrayOfOuvrague">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Ouvrague" nillable="true" type="tns:Ouvrague" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOuvrague" nillable="true" type="tns:ArrayOfOuvrague" />
+  <xs:complexType name="Ouvrague">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="auteur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="etat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="theme" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="titre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="typeOuvrague" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Ouvrague" nillable="true" type="tns:Ouvrague" />
+  <xs:complexType name="ArrayOfEmprinte">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Emprinte" nillable="true" type="tns:Emprinte" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEmprinte" nillable="true" type="tns:ArrayOfEmprinte" />
+  <xs:complexType name="Emprinte">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codeOuvrague" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="dateReservation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nomUtilisateurEmprenteur" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="numeroEmprinte" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="valider" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Emprinte" nillable="true" type="tns:Emprinte" />
+</xs:schema>

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,8 +16,11 @@ namespace BiblioUIEmprenteur
 {
     public partial class Acceuil : Form
     {
-        public static ServiceClientCompte scc;
-        public static ServiceClientOvrague sco;
+        //public static ServiceClientCompte scc;
+        //public static ServiceClientOvrague sco;
+
+        public static ServiceWcf.ServiceClientCompteClient scc;
+        public static ServiceWcf.ServiceClientOvragueClient sco;
 
         public static CompteEtudiant compteEtudiant;
         public static CompteEnseigant CompteEnseigant;
@@ -31,13 +35,20 @@ namespace BiblioUIEmprenteur
             try
             {
 
-                TcpChannel chl = new TcpChannel();
+                /*TcpChannel chl = new TcpChannel();
                 ChannelServices.RegisterChannel(chl, false);
                 Console.WriteLine("Client: Canal enregistré");
                 scc = (ServiceClientCompte)Activator.GetObject(typeof(ServiceClientCompte),
                  "tcp://localhost:1234/FournisseurServiceCompte");
                 sco = (ServiceClientOvrague)Activator.GetObject(typeof(ServiceClientOvrague),
-                    "tcp://localhost:1234/FournisseurServiceOuvrague");
+                          "tcp://localhost:1234/FournisseurServiceOuvrague");*/
+
+
+                scc = new ServiceWcf.ServiceClientCompteClient("NetTcpBinding_ServiceClientCompte");
+                sco = new ServiceWcf.ServiceClientOvragueClient("NetTcpBinding_ServiceClientOvrague");
+                
+                
+
             }
             catch(Exception e)
             {

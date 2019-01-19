@@ -403,23 +403,11 @@ namespace Fournisseur_Service
                 rendreOuvrague.CommandText = RequeteOuvrague.terminerEmprente();
                 rendreOuvrague.Parameters.Add("@nmsq", MySqlDbType.VarChar).Value = numEmprente;
                 rendreOuvrague.ExecuteNonQuery();
-
-                MySqlCommand emails = cnx.CreateCommand();
-
-                emails.Transaction = tran;
-                emails.CommandText = RequeteOuvrague.listAttenteOuvrague();
-                emails.Parameters.Add("@cdO", MySqlDbType.VarChar).Value = ouvrague.Code;
-
-                MySqlDataReader msdr = emails.ExecuteReader();
-
-                while (msdr.Read())
-                {
-                    listEmail.Add(msdr.GetString("email"));
-                }
+                
 
 
                 tran.Commit();
-                return listEmail.ToArray();
+                return listEmailAttente(ouvrague.Code);
 
             }
             catch (Exception e)
@@ -487,12 +475,12 @@ namespace Fournisseur_Service
             
             List<String> listEmail = new List<String>();
 
-           
+            MySqlConnection cnx1 = new MySqlConnection("server=localhost;userid=root;password=admin;database=bibiotheque");
 
-                try
+            try
                 {
-                    cnx.Open();
-                    MySqlCommand emails = cnx.CreateCommand();
+                    cnx1.Open();
+                    MySqlCommand emails = cnx1.CreateCommand();
 
                     emails.CommandText = RequeteOuvrague.listAttenteOuvrague();
                     emails.Parameters.Add("@cdO", MySqlDbType.VarChar).Value = codeOuvrage;
@@ -511,6 +499,7 @@ namespace Fournisseur_Service
                 }
                 finally
                 {
+                    cnx1.Dispose();
                     cnx.Dispose();
                 }
             

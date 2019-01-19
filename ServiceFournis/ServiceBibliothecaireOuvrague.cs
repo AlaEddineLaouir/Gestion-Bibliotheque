@@ -9,7 +9,7 @@ namespace ServiceFournis
     public interface ServiceBibliothecaireOuvrague
     {
         Ouvrague[] chercherOuvrague(String motCle);
-        Boolean emprinterOuvrague(Compte compte, String codeOuvrague);
+        Boolean emprinterOuvrague(String nomUtilisateur, String codeOuvrague);
         Boolean renderOuvrague(String code,int numEmprente);
 
         Boolean validerReservation(int numeroEmprente, String codeOuvrague);

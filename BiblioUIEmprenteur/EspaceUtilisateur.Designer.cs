@@ -29,11 +29,14 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.emprente1 = new BiblioUIEmprenteur.Emprente();
             this.bunifuTileButton5 = new Bunifu.Framework.UI.BunifuTileButton();
             this.bunifuTileButton4 = new Bunifu.Framework.UI.BunifuTileButton();
             this.bunifuTileButton3 = new Bunifu.Framework.UI.BunifuTileButton();
             this.bunifuTileButton2 = new Bunifu.Framework.UI.BunifuTileButton();
             this.bunifuTileButton1 = new Bunifu.Framework.UI.BunifuTileButton();
+            this.reservation1 = new BiblioUIEmprenteur.Reservation();
+            this.ouvrage1 = new BiblioUIEmprenteur.Ouvrage();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +53,15 @@
             this.panel1.Size = new System.Drawing.Size(1316, 157);
             this.panel1.TabIndex = 0;
             // 
+            // emprente1
+            // 
+            this.emprente1.BackColor = System.Drawing.Color.White;
+            this.emprente1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.emprente1.Location = new System.Drawing.Point(0, 157);
+            this.emprente1.Name = "emprente1";
+            this.emprente1.Size = new System.Drawing.Size(1316, 420);
+            this.emprente1.TabIndex = 1;
+            // 
             // bunifuTileButton5
             // 
             this.bunifuTileButton5.BackColor = System.Drawing.Color.Tan;
@@ -62,12 +74,13 @@
             this.bunifuTileButton5.ImagePosition = 0;
             this.bunifuTileButton5.ImageZoom = 50;
             this.bunifuTileButton5.LabelPosition = 41;
-            this.bunifuTileButton5.LabelText = "Reservation";
+            this.bunifuTileButton5.LabelText = "Ouvrage";
             this.bunifuTileButton5.Location = new System.Drawing.Point(290, 6);
             this.bunifuTileButton5.Margin = new System.Windows.Forms.Padding(6);
             this.bunifuTileButton5.Name = "bunifuTileButton5";
             this.bunifuTileButton5.Size = new System.Drawing.Size(220, 136);
             this.bunifuTileButton5.TabIndex = 7;
+            this.bunifuTileButton5.Click += new System.EventHandler(this.bunifuTileButton5_Click);
             // 
             // bunifuTileButton4
             // 
@@ -107,6 +120,7 @@
             this.bunifuTileButton3.Name = "bunifuTileButton3";
             this.bunifuTileButton3.Size = new System.Drawing.Size(220, 136);
             this.bunifuTileButton3.TabIndex = 5;
+            this.bunifuTileButton3.Click += new System.EventHandler(this.bunifuTileButton3_Click);
             // 
             // bunifuTileButton2
             // 
@@ -126,6 +140,7 @@
             this.bunifuTileButton2.Name = "bunifuTileButton2";
             this.bunifuTileButton2.Size = new System.Drawing.Size(220, 136);
             this.bunifuTileButton2.TabIndex = 4;
+            this.bunifuTileButton2.Click += new System.EventHandler(this.bunifuTileButton2_Click);
             // 
             // bunifuTileButton1
             // 
@@ -147,11 +162,31 @@
             this.bunifuTileButton1.TabIndex = 3;
             this.bunifuTileButton1.Click += new System.EventHandler(this.bunifuTileButton1_Click);
             // 
+            // reservation1
+            // 
+            this.reservation1.BackColor = System.Drawing.Color.White;
+            this.reservation1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reservation1.Location = new System.Drawing.Point(0, 157);
+            this.reservation1.Name = "reservation1";
+            this.reservation1.Size = new System.Drawing.Size(1316, 420);
+            this.reservation1.TabIndex = 2;
+            // 
+            // ouvrage1
+            // 
+            this.ouvrage1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ouvrage1.Location = new System.Drawing.Point(0, 157);
+            this.ouvrage1.Name = "ouvrage1";
+            this.ouvrage1.Size = new System.Drawing.Size(1316, 420);
+            this.ouvrage1.TabIndex = 3;
+            // 
             // EspaceUtilisateur
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.ouvrage1);
+            this.Controls.Add(this.reservation1);
+            this.Controls.Add(this.emprente1);
             this.Controls.Add(this.panel1);
             this.Name = "EspaceUtilisateur";
             this.Size = new System.Drawing.Size(1316, 577);
@@ -168,5 +203,8 @@
         private Bunifu.Framework.UI.BunifuTileButton bunifuTileButton2;
         private Bunifu.Framework.UI.BunifuTileButton bunifuTileButton1;
         private Bunifu.Framework.UI.BunifuTileButton bunifuTileButton5;
+        private Emprente emprente1;
+        private Reservation reservation1;
+        private Ouvrage ouvrage1;
     }
 }
